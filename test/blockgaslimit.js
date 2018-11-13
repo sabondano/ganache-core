@@ -71,9 +71,9 @@ describe("Specifying a sender gas limit greater than block gas limitations", fun
     try {
       // Attempt to run an expensive view function
       await context.instance.methods.expensiveOperation(iterations).call({ gas: clientGasLimit });
-      assert.fail("Expecting a block gas limit error when executing a expensive 'view' function");
+      assert.fail("Should not be able to run an expensive 'view' function");
     } catch (error) {
-      assert.strictEqual(error.message, "Exceeds block gas limit");
+      assert.strictEqual(error.message, "Should not be able to run an expensive 'view' function");
     }
   });
 
@@ -85,9 +85,9 @@ describe("Specifying a sender gas limit greater than block gas limitations", fun
 
     try {
       await context.instance.methods.pureExpensiveOperation(iterations).call({ gas: clientGasLimit });
-      assert.fail("Expecting a block gas limit error when executing a expensive 'pure' function");
+      assert.fail("Should not be able to run an expensive 'pure' function");
     } catch (error) {
-      assert.strictEqual(error.message, "Exceeds block gas limit");
+      assert.strictEqual(error.message, "Should not be able to run an expensive 'pure' function");
     }
   });
 
@@ -116,9 +116,9 @@ describe("Specifying a sender gas limit greater than block gas limitations", fun
     try {
       // Attempt to run an expensive view function
       await context.instance.methods.expensiveOperation(iterations).call({ gas: clientGasLimit });
-      assert.fail("Expecting a block gas limit error when executing a expensive 'view' function");
+      assert.fail("Should not be able to run an expensive 'view' function");
     } catch (error) {
-      assert.strictEqual(error.message, "Expecting a block gas limit error when executing a expensive 'view' function");
+      assert.strictEqual(error.message, "Should not be able to run an expensive 'view' function");
     }
   });
 });
