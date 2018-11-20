@@ -7,11 +7,9 @@ const debug = require("debug")("ganache");
 try {
   // make sure these exist before we try to load ganache with native modules
   const optionalDependencies = require("./package.json").optionalDependencies;
-  const wrongWeb3 = require("web3/package.json").version !== optionalDependencies["web3"];
-  const wrongEthereumJs = require(
-    "ethereumjs-wallet/package.json"
-  ).version !== optionalDependencies["ethereumjs-wallet"];
-  if (wrongWeb3 || wrongEthereumJs) {
+  const wrongSha3 = require("sha3/package.json").version !== optionalDependencies["sha3"];
+  const wrongScrypt = require("scrypt/package.json").version !== optionalDependencies["scrypt"];
+  if (wrongSha3 || wrongScrypt) {
     useBundled();
   } else {
     module.exports = require("./public-exports.js");
