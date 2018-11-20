@@ -1,11 +1,6 @@
 // make sourcemaps work!
 require("source-map-support/register");
 
-// make webpack grab some things without having to traverse things needlessly:
-require("eth-block-tracker");
-require("keccakjs");
-require("secp256k1");
-
 const Provider = require("./lib/provider");
 const Server = require("./lib/server");
 

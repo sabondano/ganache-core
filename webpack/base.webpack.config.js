@@ -14,8 +14,12 @@ module.exports = (override) => {
       devtool: "source-map",
       externals: [
         (context, request, callback) => {
-          var modules = /^(eth-block-tracker|keccakjs|secp256k1)(\/.*)?$/;
-          if (modules.test(request)) {
+          if (
+            /^(web3-provider-engine|eth-block-tracker|ethereumjs-wallet|web3|web3-eth|web3-eth-accounts|scrypt.js|scrypt)(\/.*)?$/.test(
+              request
+            )
+          ) {
+            console.log(request);
             return callback();
           }
 
@@ -30,16 +34,11 @@ module.exports = (override) => {
       ],
       resolve: {
         alias: {
-          keccakjs: "keccakjs/browser.js",
-
           // eth-block-tracker is es6 but automatically builds an es5 version for us on install.
           "eth-block-tracker": "eth-block-tracker/dist/es5/index.js",
 
           // replace native `scrypt` module with pure js `js-scrypt`
-          // "scrypt": "js-scrypt",
-
-          // replace native `secp256k1` with pure js `elliptic.js`
-          secp256k1: "secp256k1/elliptic.js"
+          scrypt: "js-scrypt"
         }
       },
       plugins: [

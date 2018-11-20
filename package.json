@@ -1,6 +1,6 @@
 {
   "name": "ganache-core",
-  "version": "2.3.1",
+  "version": "2.3.2.beta.0",
   "main": "./index.js",
   "engines": {
     "node": ">=8.9.0"
@@ -14,12 +14,12 @@
     "build": "webpack-cli --config ./webpack/node/core.webpack.config.js",
     "build-web": "webpack-cli --config ./webpack/web-experimental/core.webpack.config.js",
     "format": "prettier --write \"{lib,perf,test}/**/*.js\" && eslint --fix --ignore-path .gitignore .",
-    "prepublishOnly": "npm run test && npm run build && npm run test-build && mv npm-shrinkwrap.json npm-shrinkwrap.json.bak && npm prune --only=prod && npm shrinkwrap",
+    "prepublishOnly": "npm run test && npm run build && npm run test-build && mv npm-shrinkwrap.json npm-shrinkwrap.json.bak && npm prune --only=prod && npm install json --save-dev -E && npm shrinkwrap",
     "postpublish": "rm npm-shrinkwrap.json && mv npm-shrinkwrap.json.bak npm-shrinkwrap.json && npm install",
     "test": "npm run _lint && npm run _mocha",
     "test-build": "cross-env TEST_BUILD=node npm run _mocha",
     "test-web-experimental": "cross-env TEST_BUILD=web-experimental npm run _mocha",
-    "postshrinkwrap": "json -f npm-shrinkwrap.json -I -e \"d=this.dependencies;delete d.keccakjs.requires.sha3;d.sha3.optional=true;delete d['scrypt.js'].requires.scrypt;d.scrypt.optional=true;d['scrypt.js'].requires['js-scrypt']='0.2.0';\";"
+    "postshrinkwrap": "json -f npm-shrinkwrap.json -I -e \"d=this.dependencies;d.keccakjs && (delete d.keccakjs.requires.sha3);d.sha3.optional=true;d['scrypt.js'] && (delete d['scrypt.js'].requires.scrypt);d.scrypt.optional=true;d['scrypt.js'] && (d['scrypt.js'].requires['js-scrypt']='0.2.0');\";"
   },
   "dependencies": {
     "abstract-leveldown": "3.0.0",
@@ -45,7 +45,7 @@
     "merkle-patricia-tree": "2.3.1",
     "pify": "4.0.0",
     "seedrandom": "2.4.4",
-    "source-map-support": "^0.5.9",
+    "source-map-support": "0.5.9",
     "tmp": "0.0.33",
     "web3": "1.0.0-beta.35",
     "web3-provider-engine": "14.1.0",
@@ -77,8 +77,8 @@
     "webpack-cli": "3.1.0"
   },
   "optionalDependencies": {
-    "sha3": "1.1.0",
-    "scrypt": "6.0.3"
+    "scrypt": "6.0.3",
+    "sha3": "1.2.2"
   },
   "repository": {
     "type": "git",
