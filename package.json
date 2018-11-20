@@ -45,7 +45,7 @@
     "merkle-patricia-tree": "2.3.1",
     "pify": "4.0.0",
     "seedrandom": "2.4.4",
-    "source-map-support": "^0.5.9",
+    "source-map-support": "0.5.9",
     "tmp": "0.0.33",
     "web3": "1.0.0-beta.35",
     "web3-provider-engine": "14.1.0",
