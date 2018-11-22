@@ -1,11 +1,9 @@
 .npmignore
 .tern-project
 .tern-port
-.dockerignore
 .travis.yml
 .eslintrc.js
 *.log
-Dockerfile
 ISSUE_TEMPLATE.md
 .vscode/
 test/

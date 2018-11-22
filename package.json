@@ -1,6 +1,6 @@
 {
   "name": "ganache-core",
-  "version": "2.3.2-beta.0",
+  "version": "2.3.2-beta.3",
   "main": "./index.js",
   "engines": {
     "node": ">=8.9.0"
@@ -14,12 +14,12 @@
     "build": "webpack-cli --config ./webpack/node/core.webpack.config.js",
     "build-web": "webpack-cli --config ./webpack/web-experimental/core.webpack.config.js",
     "format": "prettier --write \"{lib,perf,test}/**/*.js\" && eslint --fix --ignore-path .gitignore .",
-    "prepublishOnly": "npm run test && npm run build && npm run test-build && mv npm-shrinkwrap.json npm-shrinkwrap.json.bak && npm prune --only=prod && npm install json --save-dev --no-shrinkwrap -E && npm shrinkwrap",
+    "prepublishOnly": "npm shrinkwrap && npm run test && npm run build && npm run test-build && mv npm-shrinkwrap.json npm-shrinkwrap.json.bak && npm prune --only=prod && npm install json --no-save -E && npm shrinkwrap",
+    "postshrinkwrap": "json -f npm-shrinkwrap.json -I -e \"d=this.dependencies;d.keccakjs && (delete d.keccakjs.requires.sha3);delete d.sha3;d['scrypt.js'] && (delete d['scrypt.js'].requires.scrypt);delete d.scrypt\";",
     "postpublish": "rm npm-shrinkwrap.json && mv npm-shrinkwrap.json.bak npm-shrinkwrap.json && npm install",
     "test": "npm run _lint && npm run _mocha",
     "test-build": "cross-env TEST_BUILD=node npm run _mocha",
-    "test-web-experimental": "cross-env TEST_BUILD=web-experimental npm run _mocha",
-    "postshrinkwrap": "json -f npm-shrinkwrap.json -I -e \"d=this.dependencies;d.keccakjs && (delete d.keccakjs.requires.sha3);d.sha3.optional=true;d['scrypt.js'] && (delete d['scrypt.js'].requires.scrypt);d.scrypt.optional=true;d['scrypt.js'] && (d['scrypt.js'].requires['js-scrypt']='0.2.0');\";"
+    "test-web-experimental": "cross-env TEST_BUILD=web-experimental npm run _mocha"
   },
   "dependencies": {
     "abstract-leveldown": "3.0.0",
@@ -38,7 +38,7 @@
     "ethereumjs-util": "5.2.0",
     "ethereumjs-vm": "2.4.0",
     "heap": "0.2.6",
-    "js-scrypt": "^0.2.0",
+    "js-scrypt": "0.2.0",
     "level-sublevel": "6.6.4",
     "levelup": "3.1.1",
     "lodash": "4.17.10",
