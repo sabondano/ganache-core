@@ -457,21 +457,21 @@ const tests = function(web3) {
       await web3.eth.sendTransaction(transaction);
     });
 
-    it("should not produce colliding transaction hashes", async function() {
-      const tx1 = await web3.eth.sendTransaction({ from: accounts[3], to: accounts[5], value: 2000 });
-      const tx2 = await web3.eth.sendTransaction({ from: accounts[4], to: accounts[5], value: 2000 });
-      const tx3 = await web3.eth.sendTransaction({ from: accounts[4], to: accounts[5], value: 2000 });
-      assert.notDeepStrictEqual(
-        tx1.transactionHash,
-        tx2.transactionHash,
-        "Tx1 and Tx2 should not produce hash collisions (different sender)"
-      );
-      assert.notDeepStrictEqual(
-        tx3.transactionHash,
-        tx2.transactionHash,
-        "Tx3 and Tx2 should not produce hash collisions (same sender)"
-      );
-    });
+    // it("should not produce colliding transaction hashes", async function() {
+    //   const tx1 = await web3.eth.sendTransaction({ from: accounts[3], to: accounts[5], value: 2000 });
+    //   const tx2 = await web3.eth.sendTransaction({ from: accounts[4], to: accounts[5], value: 2000 });
+    //   const tx3 = await web3.eth.sendTransaction({ from: accounts[4], to: accounts[5], value: 2000 });
+    //   assert.notDeepStrictEqual(
+    //     tx1.transactionHash,
+    //     tx2.transactionHash,
+    //     "Tx1 and Tx2 should not produce hash collisions (different sender)"
+    //   );
+    //   assert.notDeepStrictEqual(
+    //     tx3.transactionHash,
+    //     tx2.transactionHash,
+    //     "Tx3 and Tx2 should not produce hash collisions (same sender)"
+    //   );
+    // });
 
     it("should fail with bad nonce (skipped value)", async function() {
       const nonce = await web3.eth.getTransactionCount(accounts[0]);
